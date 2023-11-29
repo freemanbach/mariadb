@@ -1,0 +1,88 @@
+:: install locally from Zip file w/o msi
+cd %userprofile%
+mkdir mariadb
+
+cd mariadb
+
+download the zip mariadb file from
+https://mariadb.org/download/?t=mariadb&p=mariadb&r=10.11.6&os=windows&cpu=x86_64&pkg=zip&m=osuosl
+explode the zip file to your %userprofile%\mariadb
+
+
+like so,
+
++---bin
++---data
+|   +---mysql
+|   +---performance_schema
+|   \---sys
++---include
+|   \---mysql
+|       +---mariadb
+|       +---mysql
+|       \---server
+|           +---mysql
+|           |   \---psi
+|           \---private
+|               +---atomic
+|               \---providers
+|                   \---lzo
++---lib
+|   \---plugin
+\---share
+    +---bulgarian
+    +---charsets
+    +---chinese
+    +---czech
+    +---danish
+    +---dutch
+    +---english
+    +---estonian
+    +---french
+    +---german
+    +---greek
+    +---hindi
+    +---hungarian
+    +---italian
+    +---japanese
+    +---korean
+    +---norwegian
+    +---norwegian-ny
+    +---polish
+    +---portuguese
+    +---romanian
+    +---russian
+    +---serbian
+    +---slovak
+    +---spanish
+    +---swedish
+    \---ukrainian
+
+
+mkdir data
+
+-- execute the command on a admin DOS CMD prompt
+%userprofile%\mariadb\bin\mariadb-install-db.exe --data=..\data\
+
+
+-- to start mariadb using the admin DOS CMD prompt
+"%userprofile%\mariadb\bin\mariadbd.exe" --defaults-file="%userprofile%\mariadb\data\my.ini" --console
+
+-- find a low, med or high availibility compute node my.ini or my.cnf file from mariadb.org 
+-- and copy the contents to that data\my.ini location replacing the existing contents.
+
+-- after this service has started, there is no password for the root user
+-- You have to log in as root: mariadb.exe -u root -p mysql
+
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'YOUR_PASSWORD';
+ALTER USER 'root'@'127.0.0.1' IDENTIFIED BY 'YOUR_PASSWORD';
+-- create a new user on mysql using root account
+CREATE USER 'the_hobbit'@'localhost' IDENTIFIED BY 'YOUR_PASSWORD';
+flush privileges;
+\q
+
+so, i had an older version of mariadb 10.11.x from a year or so ago. the latest version is 10.11.6.
+to upgrade, all you had to do is to download the latest zip file w/o the debug stuff and delete the existing
+four dirs along with the four text file and copy those new dirs and files into mariadb dir leaving the data dir alone.
+This will upgrade your entire mariadb node in a nutshell. 
+
