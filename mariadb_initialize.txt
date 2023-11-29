@@ -62,7 +62,7 @@ like so,
 mkdir data
 
 -- execute the command on a admin DOS CMD prompt
-%userprofile%\mariadb\bin\mariadb-install-db.exe --data=..\data\
+%userprofile%\mariadb\bin\mariadb-install-db.exe --datadir=..\data\
 
 
 -- to start mariadb using the admin DOS CMD prompt
